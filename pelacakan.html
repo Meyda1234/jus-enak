@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pelacakan Pesanan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+    body { background-color: #fffbe9; padding: 20px; }
+    header {
+      padding: 20px;
+      background-color: #f8c300;
+      color: white;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .tracking-container {
+      background-color: white;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .step {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 30px;
+    }
+    .circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #ccc;
+      margin-right: 15px;
+      margin-top: 4px;
+      transition: background-color 0.3s ease;
+    }
+    .circle.active {
+      background-color: #f8c300;
+    }
+    .text {
+      flex: 1;
+    }
+    .text .status {
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .text .date {
+      font-size: 13px;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+
+  <header>Pelacakan Pesanan</header>
+
+  <div class="tracking-container">
+    <div class="step">
+      <div class="circle active"></div>
+      <div class="text">
+        <div class="status">✅ Pesanan Dikonfirmasi</div>
+        <div class="date">18 Juni 2025</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="circle active"></div>
+      <div class="text">
+        <div class="status">🧃 Pesanan Diproses</div>
+        <div class="date">18 Juni 2025</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="circle active"></div>
+      <div class="text">
+        <div class="status">🚚 Sedang Pengiriman</div>
+        <div class="date">18 Juni 2025</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="circle active"></div>
+      <div class="text">
+        <div class="status">🏁 Pesanan Selesai</div>
+        <div class="date">18 Juni 2025</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

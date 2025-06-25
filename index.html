@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jus Enak</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #fffbe9;
+    }
+
+    header {
+      padding: 20px;
+      background-color: #f8c300;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .jus-card {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      transition: transform 0.2s;
+    }
+
+    .jus-card:hover {
+      transform: scale(1.02);
+    }
+
+    .jus-card img {
+      width: 80px;
+      height: 80px;
+      border-radius: 12px;
+      object-fit: cover;
+      margin-right: 15px;
+    }
+
+    .jus-info {
+      flex: 1;
+    }
+
+    .jus-info h3 {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    .jus-info p {
+      color: gray;
+      font-size: 14px;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: white;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+    }
+
+    .bottom-nav a {
+      color: #666;
+      text-decoration: none;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+  </style>
+</head>
+<body>
+
+  <header>Jus Enak 🍹</header>
+
+  <div class="container">
+
+    <!-- Jus Mangga -->
+    <a href="detail-mangga.html">
+      <div class="jus-card">
+        <img src="images/jus-mangga.jpg" alt="Jus Mangga">
+        <div class="jus-info">
+          <h3>Jus Mangga</h3>
+          <p>Segar & Manis</p>
+        </div>
+      </div>
+    </a>
+
+    <!-- Jus Jambu -->
+    <a href="detail-jambu.html">
+      <div class="jus-card">
+        <img src="images/jus-jambu.jpeg" alt="Jus Jambu">
+        <div class="jus-info">
+          <h3>Jus Jambu</h3>
+          <p>Sehat & Menyegarkan</p>
+        </div>
+      </div>
+    </a>
+
+    <!-- Jus Jeruk -->
+    <a href="detail-jeruk.html">
+      <div class="jus-card">
+        <img src="images/jus-jeruk.jpeg" alt="Jus Jeruk">
+        <div class="jus-info">
+          <h3>Jus Jeruk</h3>
+          <p>Asam & Manis</p>
+        </div>
+      </div>
+    </a>
+
+    <!-- Jus Nanas -->
+    <a href="detail-nanas.html">
+      <div class="jus-card">
+        <img src="images/jus-nanas.jpeg" alt="Jus Nanas">
+        <div class="jus-info">
+          <h3>Jus Nanas</h3>
+          <p>Asam Segar</p>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="bottom-nav">
+  <a href="index.html">🏠<br>Home</a>
+  <a href="cart.html">🛒<br>Cart</a>
+  <a href="profil.html">👤<br>Profile</a>
+</div>
+
+</body>
+</html>

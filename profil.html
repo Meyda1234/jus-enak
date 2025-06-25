@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profil</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+
+    body {
+      background-color: white;
+      padding: 40px 20px 100px; /* bawah 100px supaya isi gak ketiban nav */
+    }
+
+    .profile-box {
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .foto-profil {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .foto-profil img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .info-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      background-color: #f9f9f9;
+    }
+
+    .info-label, .info-input {
+      font-size: 16px;
+      color: #333;
+      flex: 1;
+      border: none;
+      background: transparent;
+    }
+
+    .info-input {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      display: none;
+    }
+
+    .info-edit {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    .btn-section {
+      margin-top: 30px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 12px;
+      background-color: #f8c300;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn.logout {
+      background-color: #dc3545;
+    }
+
+    .btn.logout:hover {
+      background-color: #b52c3a;
+    }
+
+    .nav-bottom {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: white;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      z-index: 100;
+    }
+
+    .nav-bottom a {
+      text-align: center;
+      font-size: 14px;
+      color: #333;
+      text-decoration: none;
+    }
+
+    .nav-bottom a:hover {
+      color: #f8c300;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="profile-box">
+    <h1>Profil</h1>
+
+    <div class="foto-profil">
+      <img src="images/profil.jpg" alt="Foto Profil">
+    </div>
+
+    <div class="info-item">
+      <span class="info-label" id="display-nama">Meyda</span>
+      <input type="text" class="info-input" id="input-nama" />
+      <img src="images/edit.png" alt="Edit" class="info-edit" onclick="editField('nama')">
+    </div>
+
+    <div class="info-item">
+      <span class="info-label" id="display-kontak">+62 3458-777</span>
+      <input type="text" class="info-input" id="input-kontak" />
+      <img src="images/edit.png" alt="Edit" class="info-edit" onclick="editField('kontak')">
+    </div>
+
+    <div class="info-item">
+      <span class="info-label" id="display-alamat">Jakarta Utara, Indonesia</span>
+      <input type="text" class="info-input" id="input-alamat" />
+      <img src="images/edit.png" alt="Edit" class="info-edit" onclick="editField('alamat')">
+    </div>
+
+    <div class="info-item">
+      <a href="cart.html" class="info-label">Keranjang</a>
+    </div>
+
+    <div class="btn-section">
+      <button class="btn" onclick="saveProfile()">💾 Simpan</button>
+      <button class="btn logout" onclick="logout()">🚪 Logout</button>
+    </div>
+  </div>
+
+  <div class="nav-bottom">
+    <a href="index.html">🏠<br>Home</a>
+    <a href="cart.html">🛒<br>Keranjang</a>
+    <a href="profil.html">👤<br>Profil</a>
+  </div>
+
+  <script>
+    window.onload = function () {
+      document.getElementById('display-nama').textContent = localStorage.getItem('nama') || 'Meyda';
+      document.getElementById('display-kontak').textContent = localStorage.getItem('kontak') || '+62 3458-777';
+      document.getElementById('display-alamat').textContent = localStorage.getItem('alamat') || 'Jakarta Utara, Indonesia';
+    }
+
+    function editField(field) {
+      const display = document.getElementById('display-' + field);
+      const input = document.getElementById('input-' + field);
+      input.value = display.textContent;
+      display.style.display = 'none';
+      input.style.display = 'inline';
+      input.focus();
+    }
+
+    function saveProfile() {
+      ['nama', 'kontak', 'alamat'].forEach(field => {
+        const input = document.getElementById('input-' + field);
+        const display = document.getElementById('display-' + field);
+        if (input && input.style.display === 'inline') {
+          localStorage.setItem(field, input.value);
+          display.textContent = input.value;
+          display.style.display = 'inline';
+          input.style.display = 'none';
+        }
+      });
+      alert("Profil disimpan!");
+    }
+
+    function logout() {
+      localStorage.clear();
+      alert("Logout berhasil!");
+      window.location.href = "index.html";
+    }
+  </script>
+
+</body>
+</html>

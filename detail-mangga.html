@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Jus Mangga</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+    body { background-color: #fffbe9; }
+    header { padding: 20px; background-color: #f8c300; text-align: center; font-size: 24px; font-weight: bold; color: white; }
+    .container { padding: 20px; }
+    .jus-image { width: 100%; border-radius: 12px; margin-bottom: 20px; }
+    h2 { font-size: 24px; margin-bottom: 10px; }
+    p { font-size: 16px; color: #444; margin-bottom: 20px; }
+    .price { font-size: 20px; font-weight: bold; margin-bottom: 20px; }
+    button {
+      padding: 12px 20px;
+      background-color: #f8c300;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e5b200;
+    }
+  </style>
+</head>
+<body>
+
+  <header>Detail Jus Mangga</header>
+  <div class="container">
+    <img src="images/jus-mangga.jpg" alt="Jus Mangga" class="jus-image">
+    <h2>Jus Mangga</h2>
+    <p>Jus segar dari mangga matang yang manis dan menyegarkan. Cocok dinikmati di siang hari.</p>
+    <div class="price">Rp 15.000</div>
+    <button onclick="addToCart()">+ Tambah ke Keranjang</button>
+  </div>
+
+  <script>
+  function addToCart() {
+    const item = {
+      name: 'Jus Mangga',
+      price: 15000,
+      image: 'images/jus-mangga.jpg',
+      quantity: 1
+    };
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    const existingItem = cart.find(i => i.name === item.name);
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      cart.push(item);
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert("Jus Mangga ditambahkan ke keranjang!");
+  }
+</script>
+
+</body>
+</html>

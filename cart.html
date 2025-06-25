@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Keranjang</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+    body {
+      background-color: #fffbe9;
+      padding-bottom: 100px; /* biar ga ketiban nav */
+    }
+
+    header {
+      padding: 20px;
+      background-color: #f8c300;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .container { padding: 20px; }
+
+    .cart-item {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .cart-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .cart-info { flex: 1; }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .quantity-controls button {
+      padding: 4px 10px;
+      font-size: 16px;
+      border: none;
+      background-color: #f8c300;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .quantity-controls button:hover {
+      background-color: #e5b200;
+    }
+
+    .checkout {
+      margin-top: 30px;
+      padding: 12px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      display: none; /* awalnya disembunyiin */
+    }
+
+    .checkout:hover {
+      background-color: #218838;
+    }
+
+    .total {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .nav-bottom {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: white;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      z-index: 100;
+    }
+
+    .nav-bottom a {
+      text-align: center;
+      font-size: 14px;
+      color: #333;
+      text-decoration: none;
+    }
+
+    .nav-bottom a:hover {
+      color: #f8c300;
+    }
+  </style>
+</head>
+<body>
+
+  <header>🛒 Keranjang</header>
+
+  <div class="container">
+    <div id="cart-items"></div>
+    <div class="total" id="total-price"></div>
+    <button class="checkout" onclick="checkout()">Checkout Sekarang</button>
+  </div>
+
+  <div class="nav-bottom">
+    <a href="index.html">🏠<br>Home</a>
+    <a href="cart.html">🛒<br>Keranjang</a>
+    <a href="profil.html">👤<br>Profil</a>
+  </div>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function saveCart() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function updateQuantity(index, change) {
+      cart[index].quantity += change;
+      if (cart[index].quantity <= 0) {
+        cart.splice(index, 1);
+      }
+      saveCart();
+      displayCart();
+    }
+
+    function displayCart() {
+      const container = document.getElementById('cart-items');
+      const totalEl = document.getElementById('total-price');
+      const checkoutBtn = document.querySelector('.checkout');
+      container.innerHTML = '';
+      let total = 0;
+
+      if (cart.length === 0) {
+        container.innerHTML = '<p>Keranjang kosong!</p>';
+        totalEl.innerHTML = '';
+        checkoutBtn.style.display = 'none'; // disembunyiin
+        return;
+      }
+
+      checkoutBtn.style.display = 'block'; // ditampilin kalau ada isinya
+
+      cart.forEach((item, index) => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+          <img src="${item.image}" alt="${item.name}">
+          <div class="cart-info">
+            <strong>${item.name}</strong><br>
+            Rp ${item.price.toLocaleString()} x ${item.quantity} = <strong>Rp ${itemTotal.toLocaleString()}</strong>
+            <div class="quantity-controls">
+              <button onclick="updateQuantity(${index}, -1)">-</button>
+              <span>${item.quantity}</span>
+              <button onclick="updateQuantity(${index}, 1)">+</button>
+            </div>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+
+      totalEl.innerHTML = 'Total: Rp ' + total.toLocaleString();
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert("Keranjang kosong!");
+        return;
+      }
+
+      let total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      alert(`Total belanja Kamu: Rp ${total.toLocaleString()}
+Lanjut ke halaman checkout...`);
+
+      cart = [];
+      saveCart();
+      window.location.href = "checkout.html";
+    }
+
+    displayCart();
+  </script>
+
+</body>
+</html>
